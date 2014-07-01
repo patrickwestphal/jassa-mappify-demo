@@ -1,0 +1,17 @@
+{
+  "name": "ui.jassa.openlayers.jassa-map-ol-styleable",
+  "version": "0.0.0",
+  "dependencies": {
+    "jquery-ui": "1.10.3",
+    "openlayers": "2.13.1",
+    "angular": "1.2.15",
+    "angular-ui-bootstrap": "0.11.0",
+    "json3": "~3.2.6",
+    "es5-shim": "~2.1.0",
+    "jquery": "~1.9.1",
+    "bootstrap": "3.1.0",
+    "jassa": "0.0.2",
+    "underscore": "1.6.0",
+    "ng-grid-bower": "2.0.7"
+  }
+}
