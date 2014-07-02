@@ -7,7 +7,7 @@ angular
 
     $scope.config = {
         center: { lon: 12.35, lat: 51.35 },
-        zoom: 10
+        zoom: 15
     };
     var sparqlService = new Jassa.service.SparqlServiceHttp('http://localhost/sparql', ['http://linkedgeodata.org/']);
 //    var sparqlService = new Jassa.service.SparqlServiceHttp('http://localhost/sparql', ['http://dbpedia.org']);

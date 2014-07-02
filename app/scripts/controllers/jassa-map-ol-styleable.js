@@ -21,6 +21,19 @@ Jassa.setOlMapCenter = function(map, config) {
 angular.module('ui.jassa.openlayers.jassa-map-ol-styleable', ['ui.jassa.openlayers.jassa-map-ol-styleable-config'])
   .controller('JassaMapOlStyleableCtrl', function($scope, mapConfigService) {
     $scope.mapConfig = mapConfigService;
+    $scope.btnsConf = {
+      top: '0px',
+      left: '0px',
+      height: '100px',
+      width: '23em'
+    };
+    $scope.controlsConf = {
+      top: '110px',
+      left: '0px',
+      height: 'calc(100% - 110px)',
+      width: '23em'
+    };
+
     // <stuffCopiedFromJassaMapOl>
     var refresh;
 
@@ -85,8 +98,7 @@ angular.module('ui.jassa.openlayers.jassa-map-ol-styleable', ['ui.jassa.openlaye
   .directive('jassaMapOlStyleable', function($parse) {
     return {
       restrict: 'EA',
-      replace: true,
-      template: '<div></div>',
+      templateUrl: 'views/controls.html',
       controller: 'JassaMapOlStyleableCtrl',
       scope: {
         config: '=',
