@@ -27,7 +27,6 @@ angular
     }];
 
     $scope.selectGeom = function(data) {
-      debugger;
       alert(JSON.stringify(data));
     };
 });
