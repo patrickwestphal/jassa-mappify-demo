@@ -24,65 +24,82 @@ angular.module('ui.jassa.openlayers.jassa-map-ol-styleable', ['ui.jassa.openlaye
     $scope.mapConfig = mapConfigService;
     $scope.controls = controlsService;
 
-    // <stuffCopiedFromJassaMapOl>
-    var refresh;
+    // wire layers and buttons to set up initial and maximum map sections
+    var initBoxLayer = new OpenLayers.Layer.Vector('initial box', {
+      styleMap: new OpenLayers.StyleMap({
+        fillColor: '#00FF00', fillOpacity: 0.2 })
+    });
 
-    var defaultViewStateFetcher = new Jassa.geo.ViewStateFetcher();
-    $scope.ObjectUtils = Jassa.util.ObjectUtils;
+    var maxBoxLayer = new OpenLayers.Layer.Vector('maximal box', {
+      styleMap: new OpenLayers.StyleMap({
+        fillColor: '#FF0000', fillOpacity: 0.15 })
+    });
+    console.log($scope.map);
+    $scope.$watch('map', function(oldVal, newVal) {
+      debugger;
+    });
+//    $scope.map.addLayer(initBoxLayer);
 
-    $scope.$watch('config', function(config, oldConfig) {
-      if(!_(config).isEqual(oldConfig)) {
-        Jassa.setOlMapCenter($scope.map, config);
-      }
-    }, true);
 
-    var watchList = '[map.center, map.zoom, ObjectUtils.hashCode(sources)]';
-
-    $scope.$watch(watchList, function() {
-      refresh();
-    }, true);
-
-    refresh = function() {
-      var mapWrapper = $scope.map.widget;
-      mapWrapper.clearItems();
-      var dataSources = $scope.sources;
-
-      // FIXME: use fixed bounds of maxMapSection as bounds if this section is smaller than
-      // Jassa.geo.openlayers.MapUtils.getExtent($scope.map)
-      var bounds = Jassa.geo.openlayers.MapUtils.getExtent($scope.map);
-      _(dataSources).each(function(dataSource){
-        var viewStateFetcher = dataSource.viewStateFetcher || defaultViewStateFetcher;
-        var sparqlService = dataSource.sparqlService;
-        var mapFactory = dataSource.mapFactory;
-        var conceptFactory = dataSource.conceptFactory;
-        var concept = conceptFactory.createConcept();
-
-        // TODO: do I need this?
-        var quadTreeConfig = dataSource.quadTreeConfig;
-        var promise = viewStateFetcher.fetchViewState(sparqlService, mapFactory, concept, bounds, quadTreeConfig);
-
-        promise.done(function(viewState) {
-          var nodes = viewState.getNodes();
-          _(nodes).each(function(node) {
-            if (!node.isLoaded) {
-              mapWrapper.addBox('' + node.getBounds(), node.getBounds());
-            }
-            var data = node.data || {};
-            var docs = data.docs || [];
-
-            _(docs).each(function(doc) {
-              var itemData = {
-                id: doc.id,
-                config: dataSource  // TODO: Make the dataSource object part of the marker's data
-              };
-
-              var wkt = doc.wkt.getLiteralLexicalForm();
-              mapWrapper.addWkt(doc.id, wkt, itemData);  // // {fillColor: markerFillColor, strokeColor: markerStrokeColor});
-            });
-          });
-        });
-      });
-    };
+//    // <stuffCopiedFromJassaMapOl> ###################################################################################
+//    var refresh;
+//
+//    var defaultViewStateFetcher = new Jassa.geo.ViewStateFetcher();
+//    $scope.ObjectUtils = Jassa.util.ObjectUtils;
+//
+//    $scope.$watch('config', function(config, oldConfig) {
+//      if(!_(config).isEqual(oldConfig)) {
+//        Jassa.setOlMapCenter($scope.map, config);
+//      }
+//    }, true);
+//
+//    var watchList = '[map.center, map.zoom, ObjectUtils.hashCode(sources)]';
+//
+//    $scope.$watch(watchList, function() {
+//      refresh();
+//    }, true);
+//
+//    refresh = function() {
+//      var mapWrapper = $scope.map.widget;
+//      mapWrapper.clearItems();
+//      var dataSources = $scope.sources;
+//
+//      // FIXME: use fixed bounds of maxMapSection as bounds if this section is smaller than
+//      // Jassa.geo.openlayers.MapUtils.getExtent($scope.map)
+//      var bounds = Jassa.geo.openlayers.MapUtils.getExtent($scope.map);
+//      _(dataSources).each(function(dataSource){
+//        var viewStateFetcher = dataSource.viewStateFetcher || defaultViewStateFetcher;
+//        var sparqlService = dataSource.sparqlService;
+//        var mapFactory = dataSource.mapFactory;
+//        var conceptFactory = dataSource.conceptFactory;
+//        var concept = conceptFactory.createConcept();
+//
+//        // TODO: do I need this?
+//        var quadTreeConfig = dataSource.quadTreeConfig;
+//        var promise = viewStateFetcher.fetchViewState(sparqlService, mapFactory, concept, bounds, quadTreeConfig);
+//
+//        promise.done(function(viewState) {
+//          var nodes = viewState.getNodes();
+//          _(nodes).each(function(node) {
+//            if (!node.isLoaded) {
+//              mapWrapper.addBox('' + node.getBounds(), node.getBounds());
+//            }
+//            var data = node.data || {};
+//            var docs = data.docs || [];
+//
+//            _(docs).each(function(doc) {
+//              var itemData = {
+//                id: doc.id,
+//                config: dataSource  // TODO: Make the dataSource object part of the marker's data
+//              };
+//
+//              var wkt = doc.wkt.getLiteralLexicalForm();
+//              mapWrapper.addWkt(doc.id, wkt, itemData);  // // {fillColor: markerFillColor, strokeColor: markerStrokeColor});
+//            });
+//          });
+//        });
+//      });
+//    };
     // </stuffCopiedFromJassaMapOl>
   })
   .directive('jassaMapOlStyleable', function($parse) {
