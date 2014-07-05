@@ -1,7 +1,7 @@
 'use strict';
 
 angular
-  .module('ui.jassa.openlayers.jassa-map-ol-styleable-app', ['ui.bootstrap', 'ui.jassa.openlayers', 'ui.jassa.openlayers.jassa-map-ol-styleable'])
+  .module('ui.jassa.openlayers.jassa-map-ol-styleable-app', ['ngSanitize', 'ui.bootstrap', 'ui.jassa.openlayers', 'ui.jassa.openlayers.jassa-map-ol-styleable'])
   //
   .controller('MainCtrl', function ($scope) {
 
