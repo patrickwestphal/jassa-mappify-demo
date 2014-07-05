@@ -55,13 +55,11 @@
         ]
       };
 
-      // TODO: fire event afterwards
       this.map = new OpenLayers.Map(this.domElement, options);
 
       /*
        * Renderer init (needed for outlines of labels)
        */
-
       var renderer = OpenLayers.Util.getParameters(window.location.href).renderer;
       renderer = (renderer) ? [renderer] : OpenLayers.Layer.Vector.prototype.renderers;
 
@@ -147,7 +145,6 @@
 
       this.map.addLayers([mapnikLayer, this.boxLayer, this.featureLayer]);
 
-
       /*
        * Forward some simple events
        */
@@ -167,7 +164,6 @@
         highlightOnly: true,
         //renderIntent: 'temporary',
         selectStyle: this.styles.hoverStyle,
-
 
         eventListeners: {
           beforefeaturehighlighted: function(event) {
