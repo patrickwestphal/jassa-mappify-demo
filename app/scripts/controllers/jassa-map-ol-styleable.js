@@ -25,21 +25,15 @@ angular.module('ui.jassa.openlayers.jassa-map-ol-styleable', ['ui.jassa.openlaye
     $scope.controls = controlsService;
 
     // wire layers and buttons to set up initial and maximum map sections
-    var initBoxLayer = new OpenLayers.Layer.Vector('initial box', {
-      styleMap: new OpenLayers.StyleMap({
-        fillColor: '#00FF00', fillOpacity: 0.2 })
-    });
+    $scope.$on('jassa-map-created', function(event) {
+      event.stopPropagation();
 
-    var maxBoxLayer = new OpenLayers.Layer.Vector('maximal box', {
-      styleMap: new OpenLayers.StyleMap({
-        fillColor: '#FF0000', fillOpacity: 0.15 })
-    });
-    console.log($scope.map);
-    $scope.$watch('map', function(oldVal, newVal) {
-      debugger;
-    });
-//    $scope.map.addLayer(initBoxLayer);
+      $scope.map.addLayer($scope.controls.initBoxLayer);
+      $scope.map.addLayer($scope.controls.maxBoxLayer);
 
+      $scope.map.addControl($scope.controls.initBoxDrawControl);
+      $scope.map.addControl($scope.controls.maxBoxDrawControl);
+    });
 
 //    // <stuffCopiedFromJassaMapOl> ###################################################################################
 //    var refresh;
@@ -123,6 +117,7 @@ angular.module('ui.jassa.openlayers.jassa-map-ol-styleable', ['ui.jassa.openlaye
         scope.map = map;
 
         Jassa.setOlMapCenter(scope.map, scope.config);
+        scope.$emit('jassa-map-created');
 
         var syncModel = function(event) {
           var tmp = scope.map.getCenter();
