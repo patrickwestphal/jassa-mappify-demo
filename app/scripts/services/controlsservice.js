@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('ui.jassa.openlayers.jassa-map-ol-styleable-config', [])
-  .service('controlsService', function() {
+angular.module('ui.jassa.openlayers.jassa-map-ol-styleable')
+  .service('controlsService', function($rootScope) {
 
     /*
      * general layout stuff for controls
