@@ -23,6 +23,13 @@
                 display : block;
                 border-radius: 0px 6px 0px 0px;
                 overflow : auto;">
+        <facet-tree
+                sparql-service="sparqlService"
+                facet-tree-config="facetTreeConfig"
+                select="selectFacet(path)"
+                plugins="facetTreePlugins"
+                plugin-context="facetTreePluginContext">
+        </facet-tree>
         controls
     </div>
 </div>

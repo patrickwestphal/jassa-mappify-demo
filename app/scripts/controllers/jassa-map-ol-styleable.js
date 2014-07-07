@@ -18,7 +18,7 @@ Jassa.setOlMapCenter = function(map, config) {
   }
 };
 
-angular.module('ui.jassa.openlayers.jassa-map-ol-styleable', [])
+angular.module('ui.jassa.openlayers.jassa-map-ol-styleable', ['ui.bootstrap', 'ui.jassa'])
   .controller('JassaMapOlStyleableCtrl', function($scope, controlsService, conceptConfigsService, mapConfigService) {
     $scope.conceptConfigs = conceptConfigsService;
     $scope.mapConfig = mapConfigService;
@@ -35,7 +35,14 @@ angular.module('ui.jassa.openlayers.jassa-map-ol-styleable', [])
       $scope.map.addControl($scope.controls.maxBoxDrawControl);
     });
 
-//    // <stuffCopiedFromJassaMapOl> ###################################################################################
+    $scope.facetTreeConfig = new Jassa.facete.FacetTreeConfig();
+    $scope.path = null;
+    $scope.selectFacet = function(path) {
+      //alert('Selected Path: [' + path + ']');
+      $scope.path = path;
+    };
+
+    // <stuffCopiedFromJassaMapOl> ###################################################################################
 //    var refresh;
 //
 //    var defaultViewStateFetcher = new Jassa.geo.ViewStateFetcher();
@@ -104,8 +111,8 @@ angular.module('ui.jassa.openlayers.jassa-map-ol-styleable', [])
       scope: {
         config: '=',
         sources: '=',
-        onSelect: '&select',
-        onUnselect: '&unselect'
+        onSelect: '&select'
+//        onUnselect: '&unselect'
       },
       link: function (scope, element, attrs) {
         var $el = jQuery(element).ssbMap();
@@ -115,6 +122,11 @@ angular.module('ui.jassa.openlayers.jassa-map-ol-styleable', [])
         map.widget = widget;
 
         scope.map = map;
+        if (scope.sources.length > 0) {
+          scope.sparqlService = scope.sources[0].sparqlService;
+        } else {
+          scope.sparqlService = null;
+        }
 
         Jassa.setOlMapCenter(scope.map, scope.config);
         scope.$emit('jassa-map-created');
