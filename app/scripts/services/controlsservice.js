@@ -125,4 +125,9 @@ angular.module('ui.jassa.openlayers.jassa-map-ol-styleable')
     };
     this.initBoxLayer.events.register('featureadded', this.initBoxLayer, coordListener);
     this.maxBoxLayer.events.register('featureadded', this.maxBoxLayer, coordListener);
+
+    this.slimScrollOptions = {
+      wheelStep: 1,
+      height: '100%'
+    }
   });

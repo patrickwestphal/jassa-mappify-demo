@@ -16,16 +16,16 @@
 
 #mappify-facets {
     height: 150px;
-    margin: 10px;
+    margin: 10px 15px 10px 10px;
 }
 
 #mappify-facet-values {
     height: 150px;
-    margin: 10px;
+    margin: 10px 15px 10px 10px;
     border: none;
 }
 
 #mappify-facet-value-constraints {
     height: 150px;
-    margin: 10px;
+    margin: 10px 15px 10px 10px;
 }

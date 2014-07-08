@@ -1,4 +1,5 @@
 <div>
+
     <div id="mappify-map-section-bnts"
          style="position: absolute;
                 top: {{controls.btnsLayout.top}};
@@ -14,6 +15,7 @@
                 ng-class="{'btn-success': controls.activeBtn == controls.maxBtn.id}"
                 ng-click="controls.toggleBtn(controls.maxBtn.id)">set maximal section</button>
     </div>
+
     <div id="mappify-controls"
          style="position: absolute;
                 top: {{controls.layout.top}};
@@ -23,24 +25,26 @@
                 display : block;
                 border-radius: 0px 6px 0px 0px;
                 overflow : auto;">
-        <facet-tree
-                id="mappify-facets"
-                sparql-service="sparqlService"
-                facet-tree-config="facetTreeConfig"
-                select="selectFacet(path)"
-                plugins="facetTreePlugins"
-                plugin-context="facetTreePluginContext">
-        </facet-tree>
-        <facet-value-list
-                id="mappify-facet-values"
-                sparql-service="sparqlService"
-                facet-tree-config="facetTreeConfig"
-                path="path">
-        </facet-value-list>
-        <constraint-list
-                id="mappify-facet-value-constraints"
-                sparql-service="sparqlService"
-                facet-tree-config="facetTreeConfig">
-        </constraint-list>
+        <div class="scroll-body" slimscroll slimscroll-option="controls.slimScrollOptions">
+            <facet-tree
+                    id="mappify-facets"
+                    sparql-service="sparqlService"
+                    facet-tree-config="facetTreeConfig"
+                    select="selectFacet(path)"
+                    plugins="facetTreePlugins"
+                    plugin-context="facetTreePluginContext">
+            </facet-tree>
+            <facet-value-list
+                    id="mappify-facet-values"
+                    sparql-service="sparqlService"
+                    facet-tree-config="facetTreeConfig"
+                    path="path">
+            </facet-value-list>
+            <constraint-list
+                    id="mappify-facet-value-constraints"
+                    sparql-service="sparqlService"
+                    facet-tree-config="facetTreeConfig">
+            </constraint-list>
+        </div>
     </div>
 </div>
