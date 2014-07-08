@@ -18,3 +18,9 @@
     height: 150px;
     margin: 10px;
 }
+
+#mappify-facet-values {
+    height: 150px;
+    margin: 10px;
+    border: none;
+}
