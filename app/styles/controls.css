@@ -24,3 +24,8 @@
     margin: 10px;
     border: none;
 }
+
+#mappify-facet-value-constraints {
+    height: 150px;
+    margin: 10px;
+}
