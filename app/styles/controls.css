@@ -13,3 +13,8 @@
 #mappify-map-section-bnts button{
     margin: 3px;
 }
+
+#mappify-facets {
+    height: 150px;
+    margin: 10px;
+}
