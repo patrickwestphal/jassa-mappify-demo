@@ -410,7 +410,7 @@
         }
       );
 
-      return new OpenLayers.Feature.Vector(pt, newAttrs);;
+      return new OpenLayers.Feature.Vector(pt, newAttrs);
     },
 
     getExtent: function() {

@@ -22,13 +22,12 @@ angular.module('ui.jassa.openlayers.jassa-map-ol-styleable')
       height: '100px',
       width: '23em'
     };
+    // TODO: maybe replace objects with simple strings
     this.maxBtn = {
-      id: 'max',
-      layer: null
+      id: 'max'
     };
     this.initBtn = {
-      id: 'init',
-      layer: null
+      id: 'init'
     };
 
     this.activeBtn = null;
