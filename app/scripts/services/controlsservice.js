@@ -2,7 +2,7 @@
 
 angular.module('ui.jassa.openlayers.jassa-map-ol-styleable')
   .service('controlsService', function($rootScope) {
-
+    var cntrlsService = this;
     /*
      * general layout stuff for controls
      */
@@ -125,13 +125,28 @@ angular.module('ui.jassa.openlayers.jassa-map-ol-styleable')
     this.initBoxLayer.events.register('featureadded', this.initBoxLayer, coordListener);
     this.maxBoxLayer.events.register('featureadded', this.maxBoxLayer, coordListener);
 
+    /*
+     * options for slim scrollbar
+     */
     this.slimScrollOptions = {
       wheelStep: 1,
       height: '100%'
     };
 
+    /*
+     * concept grid options and settings
+     */
+    this.conceptSelectionWillChangeHandler = function() {};
+    this.registerConceptSelectionWillChangeHandler = function(fn) {
+      this.conceptSelectionWillChangeHandler = fn;
+    };
+    this.conceptSelectionChangedHandler = function() {} ;
+    this.registerConceptSelectionChangedHandler = function(fn) {
+      this.conceptSelectionChangedHandler = fn;
+    };
+
     this.conceptGridOptions = {
-        data : 'mcs',
+        data : 'mappifyConcepts',
         enableCellSelection : true,
         enableRowSelection : true,
         enableCellEdit : true,
@@ -139,21 +154,20 @@ angular.module('ui.jassa.openlayers.jassa-map-ol-styleable')
         columnDefs : [{
           field : 'name',
           displayName : 'concepts',
-          enableCellEdit : true}]
-//        afterSelectionChange : function(rowItem) {
-//          /* This function will be called twice when selecting a new row item:
-//           * Once for un-selecting the 'old' item and again for selecting the
-//           * new item. And I'm only interested in the latter case.
-//           */
-//          if (rowItem.selected) {
-//            $scope.$broadcast('mappify-concept-selection-changed');
-//          }
-//        },
-//        beforeSelectionChange: function(rowItem) {
-//          $scope.$broadcast('mappify-concept-selection-will-change');
-//          $scope.selectedMappifyConcept = rowItem.entity;
-//          // return false --> cancel selection; return true --> go on
-//          return true;
-//        }
+          enableCellEdit : true}],
+        afterSelectionChange : function(rowItem) {
+          /* This function will be called twice when selecting a new row item:
+           * Once for un-selecting the 'old' item and again for selecting the
+           * new item. And I'm only interested in the latter case.
+           */
+          if (rowItem.selected) {
+            cntrlsService.conceptSelectionChangedHandler(rowItem);
+          }
+        },
+        beforeSelectionChange: function(rowItem) {
+          cntrlsService.conceptSelectionWillChangeHandler(rowItem);
+          // return false --> cancel selection; return true --> go on
+          return true;
+        }
     };
   });

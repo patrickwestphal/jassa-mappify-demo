@@ -30,18 +30,14 @@
     margin: 10px 15px 10px 10px;
 }
 
-
-/* FIXME: these are mostly hacks... */
+.grid-style {
+    border: 1px solid rgb(212,212,212);
+    height: 150px
+}
 #mappify-concepts-grid {
     margin: 10px 15px 10px 10px;
-    height : 150px;
-    position : relative;
-}
-#mappify-concepts-grid div {
-    overflow : hidden;
-    height: 90px;
 }
 
-.ngHeaderContainer {
-    overflow: hidden !important;
+#mappify-concepts-grid-buttons {
+    margin-top: 10px;
 }

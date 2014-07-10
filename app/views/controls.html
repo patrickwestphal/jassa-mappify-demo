@@ -27,12 +27,12 @@
                 overflow : auto;">
         <div class="scroll-body" slimscroll slimscroll-option="controls.slimScrollOptions">
             <div id="mappify-concepts-grid">
-                <div ng-grid="controls.conceptGridOptions"></div>
+                <div class="grid-style" style="width: calc({{controls.layout.width}} - 25px)" ng-grid="controls.conceptGridOptions"></div>
 
                 <div id="mappify-concepts-grid-buttons">
                     <button class="btn btn-info" ng-click="createConcept()">+
                     </button>
-                    <button ng-click="deleteConcept()" ng-show="selectionMade()"
+                    <button ng-click="deleteConcept()" ng-show="selectedConcept"
                             class="btn btn-info">-</button>
                 </div>
             </div>

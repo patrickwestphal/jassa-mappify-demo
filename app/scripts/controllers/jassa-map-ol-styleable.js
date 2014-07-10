@@ -42,7 +42,36 @@ angular.module('ui.jassa.openlayers.jassa-map-ol-styleable', ['ui.bootstrap', 'n
       $scope.path = path;
     };
 
-    $scope.mcs = [{name: 'one'}, {name: 'two'}];
+    /*
+     * mappify concepts stuff
+     */
+    $scope.conceptCounter = 1;
+    $scope.selectedConcept = null;
+    $scope.mappifyConcepts = [];
+
+    var conceptWillChangeHandler = function(futureSelection) {
+      var entity = futureSelection.entity;
+      // TODO: do something meaningful here
+    };
+    $scope.controls.registerConceptSelectionWillChangeHandler(conceptWillChangeHandler);
+
+    var conceptChangedHandler = function(selection) {
+      var entity = selection.entity;
+      $scope.selectedConcept = entity;
+    };
+    $scope.controls.registerConceptSelectionChangedHandler(conceptChangedHandler);
+
+    $scope.deleteConcept = function() {
+      var idx = $scope.mappifyConcepts.indexOf($scope.selectedConcept);
+      $scope.selectedConcept = null;
+      $scope.mappifyConcepts.splice(idx, 1);
+    };
+
+    $scope.createConcept = function() {
+      $scope.mappifyConcepts.push({
+        name: 'Concept ' + $scope.conceptCounter++,
+      });
+    };
 
     // <stuffCopiedFromJassaMapOl> ###################################################################################
 //    var refresh;
