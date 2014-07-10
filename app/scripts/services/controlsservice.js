@@ -128,5 +128,32 @@ angular.module('ui.jassa.openlayers.jassa-map-ol-styleable')
     this.slimScrollOptions = {
       wheelStep: 1,
       height: '100%'
-    }
+    };
+
+    this.conceptGridOptions = {
+        data : 'mcs',
+        enableCellSelection : true,
+        enableRowSelection : true,
+        enableCellEdit : true,
+        multiSelect : false,
+        columnDefs : [{
+          field : 'name',
+          displayName : 'concepts',
+          enableCellEdit : true}]
+//        afterSelectionChange : function(rowItem) {
+//          /* This function will be called twice when selecting a new row item:
+//           * Once for un-selecting the 'old' item and again for selecting the
+//           * new item. And I'm only interested in the latter case.
+//           */
+//          if (rowItem.selected) {
+//            $scope.$broadcast('mappify-concept-selection-changed');
+//          }
+//        },
+//        beforeSelectionChange: function(rowItem) {
+//          $scope.$broadcast('mappify-concept-selection-will-change');
+//          $scope.selectedMappifyConcept = rowItem.entity;
+//          // return false --> cancel selection; return true --> go on
+//          return true;
+//        }
+    };
   });

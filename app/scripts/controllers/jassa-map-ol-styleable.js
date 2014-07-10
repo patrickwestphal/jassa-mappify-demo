@@ -42,6 +42,8 @@ angular.module('ui.jassa.openlayers.jassa-map-ol-styleable', ['ui.bootstrap', 'n
       $scope.path = path;
     };
 
+    $scope.mcs = [{name: 'one'}, {name: 'two'}];
+
     // <stuffCopiedFromJassaMapOl> ###################################################################################
 //    var refresh;
 //

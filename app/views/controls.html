@@ -26,6 +26,16 @@
                 border-radius: 0px 6px 0px 0px;
                 overflow : auto;">
         <div class="scroll-body" slimscroll slimscroll-option="controls.slimScrollOptions">
+            <div id="mappify-concepts-grid">
+                <div ng-grid="controls.conceptGridOptions"></div>
+
+                <div id="mappify-concepts-grid-buttons">
+                    <button class="btn btn-info" ng-click="createConcept()">+
+                    </button>
+                    <button ng-click="deleteConcept()" ng-show="selectionMade()"
+                            class="btn btn-info">-</button>
+                </div>
+            </div>
             <facet-tree
                     id="mappify-facets"
                     sparql-service="sparqlService"
