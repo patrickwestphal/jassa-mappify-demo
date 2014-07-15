@@ -30,31 +30,48 @@
                 <div class="grid-style" style="width: calc({{controls.layout.width}} - 25px)" ng-grid="controls.conceptGridOptions"></div>
 
                 <div id="mappify-concepts-grid-buttons">
-                    <button class="btn btn-info" ng-click="createConcept()">+
-                    </button>
+                    <button class="btn btn-info glyphicon glyphicon-plus-sign" ng-click="createConcept()"></button>
                     <button ng-click="deleteConcept()" ng-show="selectedConcept"
-                            class="btn btn-info">-</button>
+                            class="btn btn-info glyphicon glyphicon-minus-sign"></button>
                 </div>
             </div>
-            <facet-tree
-                    id="mappify-facets"
-                    sparql-service="sparqlService"
-                    facet-tree-config="facetTreeConfig"
-                    select="selectFacet(path)"
-                    plugins="facetTreePlugins"
-                    plugin-context="facetTreePluginContext">
-            </facet-tree>
-            <facet-value-list
-                    id="mappify-facet-values"
-                    sparql-service="sparqlService"
-                    facet-tree-config="facetTreeConfig"
-                    path="path">
-            </facet-value-list>
-            <constraint-list
-                    id="mappify-facet-value-constraints"
-                    sparql-service="sparqlService"
-                    facet-tree-config="facetTreeConfig">
-            </constraint-list>
+            <div id="mappify-settings-controls" class="tabbable tabs-top">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li ng-class="{disabled: !selectionMade()}" class="mappify-control-tab">
+                        <a href="#mappify-ctrls-facets" role="tab" data-toggle="tab"><i class="glyphicon glyphicon-filter"/></a>
+                    </li>
+                    <li ng-class="{disabled: !selectionMade()}" class="mappify-control-tab"
+                        ng-class="getTabClass('ui')">
+                        <a href="#mappify-ctrl-ui" role="tab" data-toggle="tab"><i class="glyphicon glyphicon-map-marker"/></a>
+                    </li>
+                </ul>
+                <div class="tab-content" ng-show="selectionMade()">
+                    <div class="tab-pane fade in" id="mappify-ctrls-facets">
+                        <facet-tree
+                                id="mappify-facets"
+                                sparql-service="sparqlService"
+                                facet-tree-config="facetTreeConfig"
+                                select="selectFacet(path)"
+                                plugins="facetTreePlugins"
+                                plugin-context="facetTreePluginContext">
+                        </facet-tree>
+                        <facet-value-list
+                                id="mappify-facet-values"
+                                sparql-service="sparqlService"
+                                facet-tree-config="facetTreeConfig"
+                                path="path">
+                        </facet-value-list>
+                        <constraint-list
+                                id="mappify-facet-value-constraints"
+                                sparql-service="sparqlService"
+                                facet-tree-config="facetTreeConfig">
+                        </constraint-list>
+                    </div>
+                    <div class="tab-pane fade in" id="mappify-ctrl-ui">
+                        <span style="color: #FFF">DUMMY</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -48,6 +48,7 @@ angular.module('ui.jassa.openlayers.jassa-map-ol-styleable', ['ui.bootstrap', 'n
     $scope.conceptCounter = 1;
     $scope.selectedConcept = null;
     $scope.mappifyConcepts = [];
+    $scope.selectionMade = function() { return $scope.selectedConcept !== null; };
 
     var conceptWillChangeHandler = function(futureSelection) {
       var entity = futureSelection.entity;

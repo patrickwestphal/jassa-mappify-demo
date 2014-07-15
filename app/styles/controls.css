@@ -15,18 +15,15 @@
 }
 
 #mappify-facets {
-    height: 150px;
     margin: 10px 15px 10px 10px;
 }
 
 #mappify-facet-values {
-    height: 150px;
     margin: 10px 15px 10px 10px;
     border: none;
 }
 
 #mappify-facet-value-constraints {
-    height: 150px;
     margin: 10px 15px 10px 10px;
 }
 
@@ -40,4 +37,18 @@
 
 #mappify-concepts-grid-buttons {
     margin-top: 10px;
+}
+
+div#mappify-settings-controls .nav-tabs {
+    background-color: transparent !important;
+}
+
+div#mappify-settings-controls .nav-tabs a {
+    margin: 10px 2px 0px 10px;
+    background-color: #EAEAEA !important;
+}
+
+div#mappify-settings-controls .mappify-deactivated-tab a {
+    margin: 10px 2px 0px 10px;
+    background-color: #EAEAEA !important;
 }
