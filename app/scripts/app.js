@@ -9,11 +9,9 @@ angular
         center: { lon: 12.35, lat: 51.35 },
         zoom: 15
     };
-    var sparqlService = new Jassa.service.SparqlServiceHttp('http://localhost/sparql', ['http://linkedgeodata.org/']);
-//    var sparqlService = new Jassa.service.SparqlServiceHttp('http://localhost/sparql', ['http://dbpedia.org']);
+    var sparqlService = new Jassa.service.SparqlServiceHttp('http://localhost/sparql', []);
     sparqlService = new Jassa.service.SparqlServiceCache(sparqlService);
     sparqlService = new Jassa.service.SparqlServicePaginate(sparqlService, 1000);
-
     $scope.dataSources = [{
       sparqlService: sparqlService,
       mapFactory: Jassa.geo.GeoMapFactoryUtils.wgs84MapFactory,
