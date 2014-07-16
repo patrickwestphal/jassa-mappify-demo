@@ -70,7 +70,59 @@ angular.module('ui.jassa.openlayers.jassa-map-ol-styleable', ['ui.bootstrap', 'n
 
     $scope.createConcept = function() {
       $scope.mappifyConcepts.push({
-        name: 'Concept ' + $scope.conceptCounter++,
+        name: 'Concept ' + $scope.conceptCounter++
+      });
+    };
+
+    $scope.coords = {max: null, init: null};
+    $scope.controls.registerCoordsTarget($scope.coords);
+
+    $scope.updateMap = function() {
+      var mapWrapper = $scope.map.widget;
+      mapWrapper.clearItems();
+
+      var bounds;
+      if ($scope.coords.max !== null) {
+        // FIXME: code copy from Jassa mapUtils
+        var extnd = $scope.coords.max.getBounds();
+        var e = extnd.transform($scope.map.projection, $scope.map.displayProjection);
+        bounds = new Jassa.geo.Bounds(e.left, e.bottom, e.right, e.top);
+      } else {
+        bounds = Jassa.geo.openlayers.MapUtils.getExtent($scope.map);
+      }
+
+      var defaultViewStateFetcher = new Jassa.geo.ViewStateFetcher();
+
+      _($scope.sources).each(function(dataSource) {
+        var viewStateFetcher = dataSource.viewStateFetcher || defaultViewStateFetcher;
+        var mapFactory = dataSource.mapFactory;
+        var conceptFactory = dataSource.conceptFactory;
+        var concept = conceptFactory.createConcept();
+
+        var quadTreeConfig = dataSource.quadTreeConfig;
+        var promise = viewStateFetcher.fetchViewState(
+            $scope.sparqlService, mapFactory, concept, bounds, quadTreeConfig);
+
+        promise.done(function(viewState) {
+          var nodes = viewState.getNodes();
+          _(nodes).each(function(node) {
+            if (!node.isLoaded) {
+              mapWrapper.addBox('' + node.getBounds(), node.getBounds());
+            }
+            var data = node.data || {};
+            var docs = data.docs || [];
+
+            _(docs).each(function(doc) {
+              var itemData = {
+                id: doc.id,
+                config: dataSource  // TODO: Make the dataSource object part of the marker's data
+              };
+
+              var wkt = doc.wkt.getLiteralLexicalForm();
+              mapWrapper.addWkt(doc.id, wkt, itemData);  // // {fillColor: markerFillColor, strokeColor: markerStrokeColor});
+            });
+          });
+        });
       });
     };
 

@@ -15,6 +15,11 @@
                 ng-class="{'btn-success': controls.activeBtn == controls.maxBtn.id}"
                 ng-click="controls.toggleBtn(controls.maxBtn.id)">set maximal section</button>
     </div>
+    <button
+        class="btn btn-default" id="mappify-upate-map-btn" ng-click="updateMap()"
+        style="position: absolute;
+               top: {{controls.mapUpdateBtnLayout.top}};
+               left: {{controls.mapUpdateBtnLayout.left}}">update map</button>
 
     <div id="mappify-controls"
          style="position: absolute;

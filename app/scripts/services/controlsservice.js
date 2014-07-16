@@ -33,6 +33,14 @@ angular.module('ui.jassa.openlayers.jassa-map-ol-styleable')
     this.activeBtn = null;
 
     /*
+     * map update button
+     */
+    this.mapUpdateBtnLayout = {
+      top: '50px',
+      left: '5px'
+    };
+
+    /*
      * event handling and de-/activating of controls for bounbding box drawing
      */
     var mappifyCntrls = this;
@@ -113,13 +121,19 @@ angular.module('ui.jassa.openlayers.jassa-map-ol-styleable')
     );
     this.maxBoxLayer.events.register('featureadded', this.maxBoxLayer, toggleMaxBoxDraw);
 
+    // bind the coordinates to some scope variable registered via registerCoordsTarget
+    var coords;
+    this.registerCoordsTarget = function (targetVar) {
+      coords = targetVar;
+    };
+
     // event listener to get the current values of the box coords
     var coordListener = function(event) {
       var geometry = event.feature.geometry;
       if (event.object.name === 'initial box') {
-        mappifyCntrls.initBtn.coords = geometry;
+        coords.init = geometry;
       } else if (event.object.name === 'maximal box') {
-        mappifyCntrls.maxBtn.coords = geometry;
+        coords.max = geometry;
       }
     };
     this.initBoxLayer.events.register('featureadded', this.initBoxLayer, coordListener);
